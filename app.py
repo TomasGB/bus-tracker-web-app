@@ -2,11 +2,11 @@ from flask import Flask, jsonify
 import requests
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+
 
 @app.route('/')
-def Home():
-    return '<h1>holaaa</h1>'
+def index():
+    return '<h1>Bus Tracker API</h1>'
 
 @app.route('/api/bus', methods=['GET'])
 def BusData():
@@ -18,4 +18,6 @@ def BusData():
 
     return jsonify(result)
 
-app.run()
+if __name__ == '__main__':
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
