@@ -9,18 +9,29 @@ app = Flask(__name__)
 def index():
     def render_map():
         start_coords = (-38.71959, -62.27243)
-        folium_map = folium.Map(width='70%',height='60%',location=start_coords, zoom_start=13)
+        folium_map = folium.Map(width='70%',height='60%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/8.json?hash=0.9738513800231414').json()
         #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
         for i in range(0,len(data)):
             bus_data = data['data'][i]
             bus_route = bus_data['direccion']
-            folium.Marker(location=[bus_data['lat'], bus_data['lng']], popup=f'<strong>509</strong><br>{bus_route}').add_to(folium_map)
-        
+            bus_number = bus_data['interno']
+
+            if bus_route=='ida':
+                marker_color='#119c52'
+            else:
+                marker_color='#c71212'
+
+            folium.Marker(location=[bus_data['lat'], bus_data['lng']], popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
+
+
+        #folium_map.save('./templates/map.html')
         return folium_map._repr_html_()
 
     return f'<h1>Bus Tracker</h1><div>{render_map()}<div>'
+
+
 #API ROUTES
 @app.route('/api/bus', methods=['GET'])
 def BusData():
