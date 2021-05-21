@@ -13,7 +13,7 @@ def index():
     def render_map():
 
         start_coords = (-38.71959, -62.27243)
-        folium_map = folium.Map(width='60%',height='60%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
+        folium_map = folium.Map(width='100%',height='70%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/8.json?hash=0.9738513800231414').json()
         #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
