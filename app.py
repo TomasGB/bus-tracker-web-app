@@ -11,13 +11,15 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 #FRONTEND ROUTES
 @app.route('/')
 def index():
-    def calculate_distance(lat,lng):
+    def calculate_distance(user_lat,user_lng,lat,lng):
         #Haversine formula for distances
         # approximate radius of earth in km
         R = 6373.0
+
         #user location
-        lat1 = radians(-38.69403135950687)
-        lon1 = radians(-62.29086757471586)
+        lat1 = radians(user_lat)
+        lon1 = radians(user_lng)
+
         #target location
         lat2 = radians(lat)
         lon2 = radians(lng)
@@ -34,15 +36,16 @@ def index():
         return distance
 
     def render_map():
+        user_position=[-38.69403135950687,-62.29086757471586]
+        start_coords = (user_position[0], user_position[1])
 
-        start_coords = (-38.71959, -62.27243)
         folium_map = folium.Map(width='100%',height='70%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
         #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
 
         #my position
-        folium.Marker(location=[-38.69403135950687, -62.29086757471586],tooltip='Click for info' ,popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
+        folium.Marker(location=[user_position[0], user_position[1]],tooltip='Click for info' ,popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
 
         #Showing all buses on map
         for i in range(0,len(data)+1):
@@ -55,7 +58,7 @@ def index():
             else:
                 marker_color='#c71212'
 
-            distance=calculate_distance(float(bus_data['lat']),float(bus_data['lng']))
+            distance=calculate_distance(float(user_position[0]), float(user_position[1]),float(bus_data['lat']),float(bus_data['lng']))
 
             folium.Marker(location=[bus_data['lat'], bus_data['lng']],tooltip='Click for info' ,popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia:</strong> {distance}Km', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
             
