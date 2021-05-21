@@ -48,7 +48,7 @@ def index():
         folium.Marker(location=[user_position[0], user_position[1]],tooltip='Click for info' ,popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
 
         #Showing all buses on map
-        for i in range(0,len(data)+1):
+        for i in range(0,len(data)):
             bus_data = data['data'][i]
             bus_route = bus_data['direccion']
             bus_number = bus_data['interno']
@@ -61,7 +61,7 @@ def index():
             distance=calculate_distance(float(user_position[0]), float(user_position[1]),float(bus_data['lat']),float(bus_data['lng']))
 
             folium.Marker(location=[bus_data['lat'], bus_data['lng']],tooltip='Click for info' ,popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia:</strong> {distance}Km', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
-            
+
 
         if os.path.exists('./templates/map.html'):
             os.remove('./templates/map.html')
@@ -82,7 +82,7 @@ def BusData():
     res = requests.get(api_endpoint).json()
     res_list={'buses':[]}
 
-    for i in range(0,len(res)+1):
+    for i in range(0,len(res)):
         bus_data_response = res['data'][i]
         result = {'interno':bus_data_response['interno'],'direccion':bus_data_response['direccion'],'lat':bus_data_response['lat'],'lng':bus_data_response['lng']}
         res_list['buses'].append(result)
