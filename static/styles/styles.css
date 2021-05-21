@@ -1,0 +1,12 @@
+.body{
+    background-color: rgb(40, 99, 209);
+}
+.title{
+    font-size: 35px;
+    font-family:Helvetica;
+    margin:50px;
+    text-align:center;
+}
+.wrapper{
+    padding: 20px;
+}

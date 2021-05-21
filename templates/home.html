@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>bus tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+</head>
+
+<body class='body'>
+    <script>
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(position.coords.latitude, position.coords.longitude);
+            let user_position = document.getElementById("demo");
+            user_position.innerHTML = "Your current position: Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
+        });
+    </script>
+    <h1 class='title'>Bus Tracker</h1>
+    <p id="demo"></p>
+    <div class='wrapper'>
+        <div>
+            {% include 'map.html' %}
+        </div>
+        <div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

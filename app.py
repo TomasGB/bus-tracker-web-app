@@ -1,18 +1,24 @@
 from flask import Flask, jsonify, render_template
 import requests
 import folium
+import os
+
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 #FRONTEND ROUTES
 @app.route('/')
 def index():
     def render_map():
+
         start_coords = (-38.71959, -62.27243)
-        folium_map = folium.Map(width='70%',height='60%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
+        folium_map = folium.Map(width='100%',height='70%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/8.json?hash=0.9738513800231414').json()
         #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
+
+        #Showing all buses on map
         for i in range(0,len(data)):
             bus_data = data['data'][i]
             bus_route = bus_data['direccion']
@@ -23,13 +29,17 @@ def index():
             else:
                 marker_color='#c71212'
 
-            folium.Marker(location=[bus_data['lat'], bus_data['lng']], popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
+            folium.Marker(location=[bus_data['lat'], bus_data['lng']],tooltip='Click for info' ,popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
 
+        if os.path.exists('./templates/map.html'):
+            os.remove('./templates/map.html')
 
-        #folium_map.save('./templates/map.html')
+        folium_map.save('./templates/map.html')
         return folium_map._repr_html_()
 
-    return f'<h1>Bus Tracker</h1><div>{render_map()}<div>'
+    rendered_map=render_map()
+
+    return render_template('home.html',map=rendered_map)
 
 
 #API ROUTES
@@ -50,3 +60,4 @@ def BusData():
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=5000)
+    
