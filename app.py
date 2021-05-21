@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template
 import requests
 import folium
 import os
+from math import sin, cos, sqrt, atan2, radians
 
 
 app = Flask(__name__)
@@ -10,6 +11,28 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 #FRONTEND ROUTES
 @app.route('/')
 def index():
+    def calculate_distance(lat,lng):
+        #Haversine formula for distances
+        # approximate radius of earth in km
+        R = 6373.0
+        #user location
+        lat1 = radians(-38.69403135950687)
+        lon1 = radians(-62.29086757471586)
+        #target location
+        lat2 = radians(lat)
+        lon2 = radians(lng)
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        distance = R * c
+        distance = "{:.2f}".format(distance)
+
+        return distance
+
     def render_map():
 
         start_coords = (-38.71959, -62.27243)
@@ -17,6 +40,9 @@ def index():
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
         #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
+
+        #my position
+        folium.Marker(location=[-38.69403135950687, -62.29086757471586],tooltip='Click for info' ,popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
 
         #Showing all buses on map
         for i in range(0,len(data)+1):
@@ -29,7 +55,10 @@ def index():
             else:
                 marker_color='#c71212'
 
-            folium.Marker(location=[bus_data['lat'], bus_data['lng']],tooltip='Click for info' ,popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
+            distance=calculate_distance(float(bus_data['lat']),float(bus_data['lng']))
+
+            folium.Marker(location=[bus_data['lat'], bus_data['lng']],tooltip='Click for info' ,popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia:</strong> {distance}Km', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
+            
 
         if os.path.exists('./templates/map.html'):
             os.remove('./templates/map.html')
@@ -50,7 +79,7 @@ def BusData():
     res = requests.get(api_endpoint).json()
     res_list={'buses':[]}
 
-    for i in range(0,len(res)):
+    for i in range(0,len(res)+1):
         bus_data_response = res['data'][i]
         result = {'interno':bus_data_response['interno'],'direccion':bus_data_response['direccion'],'lat':bus_data_response['lat'],'lng':bus_data_response['lng']}
         res_list['buses'].append(result)
