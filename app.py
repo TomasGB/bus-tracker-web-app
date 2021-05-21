@@ -15,11 +15,11 @@ def index():
         start_coords = (-38.71959, -62.27243)
         folium_map = folium.Map(width='100%',height='70%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
-        data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/8.json?hash=0.9738513800231414').json()
+        data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
         #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
 
         #Showing all buses on map
-        for i in range(0,len(data)):
+        for i in range(0,len(data)+1):
             bus_data = data['data'][i]
             bus_route = bus_data['direccion']
             bus_number = bus_data['interno']
@@ -46,7 +46,7 @@ def index():
 @app.route('/api/bus', methods=['GET'])
 def BusData():
 
-    api_endpoint='https://www.gpsbahia.com.ar/frontend/track_data/8.json?hash=0.9738513800231414'
+    api_endpoint='https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882'
     res = requests.get(api_endpoint).json()
     res_list={'buses':[]}
 
