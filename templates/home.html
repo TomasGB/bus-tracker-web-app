@@ -3,29 +3,32 @@
 <head>
     <title>bus tracker</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
-    <meta http-equiv='refresh' content='30'>
+    <meta http-equiv='refresh' content='1000'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body class='body'>
-    <!--<script>
-        navigator.geolocation.getCurrentPosition(function (position) {
-            //console.log(position.coords.latitude, position.coords.longitude)
-            let user_position = document.getElementById("position");
-            user_position.innerHTML = "Your current position:<br> Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
-        });
-    </script>-->
-    <h1 class='title'>Bus Tracker</h1>
-
-    <div class='wrapper'>
-        <!--<div class='user-position'>
-            <p id="position"></p>
-        </div>-->
-        <div>
-            {% include 'map.html' %}
+    <div class='container'>
+        <h1 class='title'>Bus Tracker</h1>
+        <div class='dev-tag'>
+            <p>
+                Developed by
+                <a href="https://github.com/TomasGB" target="_blank" rel="noopener noreferrer">
+                    Tomas Gomez Bermudez
+                </a>
+            </p>
         </div>
-
+        <div class='wrapper'>
+            <div class='datos'>
+                <p class='text'><strong>Buses data:</strong></p>
+            </div>
+            <div class='map'>
+                <div>
+                    {% include 'map.html' %}
+                </div>
+            </div>
+        </div>
     </div>
-
 </body>
 
 </html>
