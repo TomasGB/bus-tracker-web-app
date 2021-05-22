@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, render_template
 import requests
 import folium
-from folium import plugins
 import os
 from math import sin, cos, sqrt, atan2, radians
 
