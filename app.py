@@ -42,26 +42,35 @@ def index():
         folium_map = folium.Map(width='100%',height='70%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
-        #data= requests.get('https://busgpsapi.herokuapp.com/api/bus').json()
+        #data=[]
 
         #my position
-        folium.Marker(location=[user_position[0], user_position[1]],tooltip='Click for info' ,popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
+        folium.Marker(location=[user_position[0], user_position[1]], popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
 
         #Showing all buses on map
-        for i in range(0,len(data)):
-            bus_data = data['data'][i]
-            bus_route = bus_data['direccion']
-            bus_number = bus_data['interno']
+        buses_amount=len(data['data'])
+        print(buses_amount)
 
-            if bus_route=='ida':
-                marker_color='#119c52'
-            else:
-                marker_color='#c71212'
+        if buses_amount == 0:
+            print('No buses currently')
+        else:
+            for i in range(0,buses_amount):
+                bus_data = data['data'][i]
+                bus_route = bus_data['direccion']
+                bus_number = bus_data['interno']
 
-            distance=calculate_distance(float(user_position[0]), float(user_position[1]),float(bus_data['lat']),float(bus_data['lng']))
+                if bus_route=='ida':
+                    marker_color='#119c52'
+                else:
+                    marker_color='#c71212'
 
-            folium.Marker(location=[bus_data['lat'], bus_data['lng']],tooltip='Click for info' ,popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia:</strong> {distance}Km', icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')).add_to(folium_map)
+                distance=calculate_distance(float(user_position[0]), float(user_position[1]),float(bus_data['lat']),float(bus_data['lng']))
 
+                folium.Marker(location=[bus_data['lat'], bus_data['lng']],
+                            tooltip='Click for info',
+                            popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia: </strong>{distance}Km',
+                            icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')
+                            ).add_to(folium_map)
 
         if os.path.exists('./templates/map.html'):
             os.remove('./templates/map.html')
@@ -82,7 +91,7 @@ def BusData():
     res = requests.get(api_endpoint).json()
     res_list={'buses':[]}
 
-    for i in range(0,len(res)):
+    for i in range(0,len(res['data'])):
         bus_data_response = res['data'][i]
         result = {'interno':bus_data_response['interno'],'direccion':bus_data_response['direccion'],'lat':bus_data_response['lat'],'lng':bus_data_response['lng']}
         res_list['buses'].append(result)
