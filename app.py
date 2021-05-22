@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template
 import requests
 import folium
+from folium import plugins
 import os
 from math import sin, cos, sqrt, atan2, radians
 
@@ -42,14 +43,17 @@ def index():
         folium_map = folium.Map(width='100%',height='70%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
         data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
-        #data=[]
+        #data={'data':[]}
 
         #my position
-        folium.Marker(location=[user_position[0], user_position[1]], popup=f'You are here', icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')).add_to(folium_map)
+        folium.Marker(
+                location=[user_position[0], user_position[1]], 
+                popup=f'You are here', 
+                icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')
+                ).add_to(folium_map)
 
         #Showing all buses on map
         buses_amount=len(data['data'])
-        print(buses_amount)
 
         if buses_amount == 0:
             print('No buses currently')
@@ -72,6 +76,15 @@ def index():
                             icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')
                             ).add_to(folium_map)
 
+        #Render routes
+        going_route = os.path.join('./routes/going_route.json')
+        comeback_route = os.path.join('./routes/comeback_route.json')
+        style_going = {'fillColor': '#119c52', 'color': '#119c52'}
+        style_comeback = {'fillColor': '#c71212', 'color': '#c71212'}
+        folium_map.add_child(folium.features.GeoJson(going_route,name='ida', style_function=lambda x:style_going))
+        folium_map.add_child(folium.features.GeoJson(comeback_route,name='vuelta', style_function=lambda x:style_comeback))
+
+        #Checks if the map exists to update it
         if os.path.exists('./templates/map.html'):
             os.remove('./templates/map.html')
 
