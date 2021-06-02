@@ -12,7 +12,7 @@
             function bus_query() {
                 let e = document.getElementById("bus_line");
                 let buses_list = e.options[e.selectedIndex].value;
-                let theUrl = "/bus/".concat(buses_list);
+                let theUrl = "/line/".concat(buses_list);
                 window.location.replace(theUrl);
             }
         </script>
