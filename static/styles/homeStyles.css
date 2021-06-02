@@ -1,8 +1,8 @@
-
 .body{
     font-family:Helvetica;
     justify-content: center;
     padding:0%;
+    margin:0%;
 }
 .container{
     background: linear-gradient(#4083E6,#013c94);
@@ -25,6 +25,7 @@
 }
 .dev-tag a{
     color:#000000;
+    text-decoration: none;
 }
 .dev-tag a:hover{
     color:rgb(78, 78, 78);

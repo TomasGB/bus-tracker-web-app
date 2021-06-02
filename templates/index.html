@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Realtime Bus Tracker</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/indexStyles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class='body'>
+    <div class='container'>
+        <script>
+            function bus_query() {
+                let e = document.getElementById("bus_line");
+                let buses_list = e.options[e.selectedIndex].value;
+                let theUrl = "/bus/".concat(buses_list);
+                window.location.replace(theUrl);
+            }
+        </script>
+        <h1 class='title'>Realtime Bus Tracker</h1>
+
+        <div class='wrapper'>
+            <form class='form' method="GET">
+                <p><strong>Please select a bus line</strong></p>
+                <select id="bus_line" name="bus_line">
+                    <option value="509">509</option>
+                    <option value="516">516</option>
+                </select>
+                <input type="button" value="Submit" onclick="bus_query()">
+            </form>
+        </div>
+        <div class='dev-tag'>
+            <p>
+                Developed by
+                <a href="https://github.com/TomasGB" target="_blank" rel="noopener noreferrer">
+                    Tomas Gomez Bermudez
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
