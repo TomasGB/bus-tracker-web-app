@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify , render_template
 import requests
 from utils import render_map
 
@@ -7,15 +7,20 @@ app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 #FRONTEND ROUTES
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
-    rendered_map=render_map()
+    
+    return render_template('index.html')
 
-    return render_template('home.html',map=rendered_map)
+@app.route('/line/<line>/', methods=['GET','POST'])
+def lines(line):
+    line_number=line
+    rendered_map=render_map(line_number)
+    return render_template('home.html',map=rendered_map, line=line_number)
 
 
 #API ROUTES
-@app.route('/api/bus', methods=['GET'])
+@app.route('/api/buses-data', methods=['GET'])
 def BusData():
 
     api_endpoint='https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882'

@@ -3,6 +3,10 @@ import folium
 import os
 from math import sin, cos, sqrt, atan2, radians
 
+APIS_DICTIONARY = {
+    '509': 'https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882' ,
+    '516':'https://www.gpsbahia.com.ar/frontend/track_data/15.json?hash=0.4630381434868298'
+    }
 
 def calculate_distance(user_lat,user_lng,lat,lng):
     #Haversine formula for distances
@@ -28,14 +32,15 @@ def calculate_distance(user_lat,user_lng,lat,lng):
 
     return distance
 
-def render_map():
+def render_map(line):
     user_position=[-38.69403135950687,-62.29086757471586]
     start_coords = (user_position[0], user_position[1])
 
     folium_map = folium.Map(width='100%',height='100%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
-    data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
-    #data={'data':[]}
+    #data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
+    #data={'data':[{"interno":"059","angle":"314","dt_server":"2021-05-31 21:11:36","dt_tracker":"2021-05-31 21:11:32","icon":"img\/markers\/objects\/land-truck.svg","imei":"866795034863025","lat":"-38.70412","lng":"-62.28109","name":"SG 59","direccion":"vuelta"},{"interno":"062","angle":"134","dt_server":"2021-05-31 21:11:38","dt_tracker":"2021-05-31 21:11:36","icon":"img\/markers\/objects\/land-truck.svg","imei":"868683029287897","lat":"-38.693828","lng":"-62.295128","name":"SG 62","direccion":"ida"}]}
+    data = requests.get(APIS_DICTIONARY[line]).json()
     
     #my position
     folium.Marker(
@@ -64,13 +69,13 @@ def render_map():
 
             folium.Marker(location=[bus_data['lat'], bus_data['lng']],
                         tooltip='Click for info',
-                        popup=f'<strong>Linea:</strong> 509<br><strong>ruta:</strong> {bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia: </strong>{distance}Km',
+                        popup=f'<strong>ruta:</strong>{bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia: </strong>{distance}Km',
                         icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')
                         ).add_to(folium_map)
 
     #Render routes
-    going_route = os.path.join('./routes/going_route.json')
-    comeback_route = os.path.join('./routes/comeback_route.json')
+    going_route = os.path.join(f'./routes/{line}/going_route.json')
+    comeback_route = os.path.join(f'./routes/{line}/comeback_route.json')
     style_going = {'fillColor': '#119c52', 'color': '#119c52'}
     style_comeback = {'fillColor': '#c71212', 'color': '#c71212'}
     folium_map.add_child(folium.features.GeoJson(going_route,name='ida', style_function=lambda x:style_going))
