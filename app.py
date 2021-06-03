@@ -18,6 +18,11 @@ def lines(line):
     rendered_map=render_map(line_number)
     return render_template('tracking.html',map=rendered_map, line=line_number)
 
+@app.route('/test/', methods=['GET','POST'])
+def test():
+    
+    return render_template('test.html')
+
 
 #API ROUTES
 @app.route('/api/buses-data', methods=['GET'])

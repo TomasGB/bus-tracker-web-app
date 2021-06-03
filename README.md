@@ -1,4 +1,4 @@
-# Realtime city bus tracker
+# Realtime city bus tracker 🚌 🗺
 
 Python based web application to track in realtime city buses showing specific data.
 Utilized Flask microframework as backend and Folium to display the map.
@@ -15,7 +15,8 @@ Utilized Flask microframework as backend and Folium to display the map.
 ## Project structure
 
 ```
-Routes: Folder containing json files with buses routes.
+Routes/
+    <line_number>: Folder containing json files with buses routes.
 
 Static/
     Styles: CSS file with styles.
