@@ -4,6 +4,7 @@ import os
 from math import sin, cos, sqrt, atan2, radians
 
 APIS_DICTIONARY = {
+    '503':'https://www.gpsbahia.com.ar/frontend/track_data/6.json?hash=0.722696101872836' ,
     '509': 'https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882' ,
     '516':'https://www.gpsbahia.com.ar/frontend/track_data/15.json?hash=0.4630381434868298'
     }
@@ -38,7 +39,6 @@ def render_map(line):
 
     folium_map = folium.Map(width='100%',height='100%',location=start_coords, zoom_start=13, tiles="OpenStreetMap")
 
-    #data = requests.get('https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882').json()
     #data={'data':[{"interno":"059","angle":"314","dt_server":"2021-05-31 21:11:36","dt_tracker":"2021-05-31 21:11:32","icon":"img\/markers\/objects\/land-truck.svg","imei":"866795034863025","lat":"-38.70412","lng":"-62.28109","name":"SG 59","direccion":"vuelta"},{"interno":"062","angle":"134","dt_server":"2021-05-31 21:11:38","dt_tracker":"2021-05-31 21:11:36","icon":"img\/markers\/objects\/land-truck.svg","imei":"868683029287897","lat":"-38.693828","lng":"-62.295128","name":"SG 62","direccion":"ida"}]}
     data = requests.get(APIS_DICTIONARY[line]).json()
     
@@ -69,7 +69,7 @@ def render_map(line):
 
             folium.Marker(location=[bus_data['lat'], bus_data['lng']],
                         tooltip='Click for info',
-                        popup=f'<strong>ruta:</strong>{bus_route}<br><strong>interno:</strong> {bus_number}<br><strong>distancia: </strong>{distance}Km',
+                        popup=f'<strong>interno:</strong> {bus_number}<br><strong>distancia: </strong>{distance}Km',
                         icon=folium.Icon(icon="bus",prefix='fa',color='black',icon_color=f'{marker_color}')
                         ).add_to(folium_map)
 

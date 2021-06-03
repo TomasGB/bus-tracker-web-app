@@ -16,7 +16,7 @@ def index():
 def lines(line):
     line_number=line
     rendered_map=render_map(line_number)
-    return render_template('home.html',map=rendered_map, line=line_number)
+    return render_template('tracking.html',map=rendered_map, line=line_number)
 
 
 #API ROUTES

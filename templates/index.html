@@ -4,6 +4,7 @@
     <title>Realtime Bus Tracker</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/indexStyles.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4083E6" />
 </head>
 
 <body class='body'>
@@ -13,7 +14,7 @@
                 let e = document.getElementById("bus_line");
                 let buses_list = e.options[e.selectedIndex].value;
                 let theUrl = "/line/".concat(buses_list);
-                window.location.replace(theUrl);
+                window.location.assign(theUrl);
             }
         </script>
         <h1 class='title'>Realtime Bus Tracker</h1>
@@ -22,6 +23,8 @@
             <form class='form' method="GET">
                 <p><strong>Please select a bus line</strong></p>
                 <select id="bus_line" name="bus_line">
+                    <option disabled selected>Select a bus line</option>
+                    <option value="503">503</option>
                     <option value="509">509</option>
                     <option value="516">516</option>
                 </select>

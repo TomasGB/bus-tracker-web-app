@@ -1,8 +1,10 @@
 <html>
 
 <head>
-    <title>{{line}} Bus Tracker</title>
+    <title>Line {{line}} | Bus Tracker</title>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/homeStyles.css') }}">
+    <meta name="theme-color" content="#4083E6" />
     <meta http-equiv='refresh' content='10'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -20,9 +22,19 @@
         </div>
         <div class='wrapper'>
             <div class='datos'>
-                <p class='text'><strong>Buses data:</strong></p>
                 <ul>
-                    <li><strong>Line: </strong>{{line}}</li>
+                    <li>
+                        <p><strong>Line: </strong>
+                            {{line}}</p>
+                    </li>
+                    <li>
+                        <p><strong>Going route:</strong> <i class='bus-going'><span class="iconify"
+                                    data-icon="bx:bx-bus" data-inline="false"></span></i></p>
+                    </li>
+                    <li>
+                        <p><strong>Comeback route:</strong> <i class='bus-comeback'><span class="iconify"
+                                    data-icon="bx:bx-bus" data-inline="false"></span></i></p>
+                    </li>
                 </ul>
             </div>
             <div class='map-wrapper'>

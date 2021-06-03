@@ -56,11 +56,15 @@
 .form select{
     margin:15px 0px;
     padding:5px;
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
 }
 .form select:hover{
     cursor:pointer;
+}
+.form select:focus{
+    cursor:pointer;
+    outline:none;
 }
 .form select option:hover{
     cursor:pointer;
@@ -77,4 +81,24 @@
 .form input:hover{
     background-color: #548adb;
     cursor:pointer;
+}
+
+@media(max-width:425px){
+    .dev-tag{
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+        color:#000000;
+    }
+    .wrapper{
+        padding: 0px;
+        display:flex;
+        flex-direction: column;
+        height:fit-content;
+    }
+    .datos{
+        width:90%;
+        margin:20px;
+        padding:0px 15px;
+    }
 }
