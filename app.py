@@ -1,6 +1,6 @@
 from flask import Flask, jsonify , render_template
 import requests
-from utils import render_map
+from utils import render_map, APIS_DICTIONARY
 
 
 app = Flask(__name__)
@@ -18,18 +18,12 @@ def lines(line):
     rendered_map=render_map(line_number)
     return render_template('tracking.html',map=rendered_map, line=line_number)
 
-@app.route('/test/', methods=['GET','POST'])
-def test():
-    
-    return render_template('test.html')
-
 
 #API ROUTES
-@app.route('/api/buses-data', methods=['GET'])
-def BusData():
+@app.route('/api/buses-data/<line>/', methods=['GET'])
+def BusData(line):
 
-    api_endpoint='https://www.gpsbahia.com.ar/frontend/track_data/1.json?hash=0.225134251739882'
-    res = requests.get(api_endpoint).json()
+    res = requests.get(APIS_DICTIONARY[line]).json()
     res_list={'buses':[]}
 
     for i in range(0,len(res['data'])):
