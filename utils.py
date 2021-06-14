@@ -44,13 +44,13 @@ def render_map(line):
     data = requests.get(APIS_DICTIONARY[line]).json()
     
     #my position
-    """folium.Marker(
+    folium.Marker(
             location=[user_position[0], user_position[1]], 
             popup=f'You are here', 
             icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')
-            ).add_to(folium_map)"""
+            ).add_to(folium_map)
 
-    plugins.LocateControl().add_to(folium_map)
+    #plugins.LocateControl(strings={"title": "See you current location", "popup": "Your position"}).add_to(folium_map)
 
     #Showing all buses on map
     buses_amount=len(data['data'])
