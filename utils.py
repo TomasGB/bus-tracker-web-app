@@ -1,5 +1,6 @@
 import requests
 import folium
+from folium import plugins
 import os
 from math import sin, cos, sqrt, atan2, radians
 
@@ -43,11 +44,13 @@ def render_map(line):
     data = requests.get(APIS_DICTIONARY[line]).json()
     
     #my position
-    folium.Marker(
+    """folium.Marker(
             location=[user_position[0], user_position[1]], 
             popup=f'You are here', 
             icon=folium.Icon(icon="user",prefix='fa',color='blue',icon_color='white')
-            ).add_to(folium_map)
+            ).add_to(folium_map)"""
+
+    plugins.LocateControl().add_to(folium_map)
 
     #Showing all buses on map
     buses_amount=len(data['data'])
@@ -66,6 +69,7 @@ def render_map(line):
                 marker_color='#c71212'
 
             distance=calculate_distance(float(user_position[0]), float(user_position[1]),float(bus_data['lat']),float(bus_data['lng']))
+            plugins
 
             folium.Marker(location=[bus_data['lat'], bus_data['lng']],
                         tooltip='Click for info',
