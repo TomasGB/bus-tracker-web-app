@@ -1,17 +1,37 @@
+:root{
+    /*---COLORS VARIABLES----*/
+    --primary-color: linear-gradient(#4083E6,#013c94);
+    --secondary-color:#457dd1;
+    --terciary-color:#548adb;
+    --fourth-color:#ffffff75;
+
+    /*---FONT VARIABLES----*/
+    --primary-font: Helvetica;
+    --font-color: #000000;
+    --font-color-light: #313131;
+    
+    /*---FONT SIZES----*/
+    --primary-font-size: 5rem;
+    --secondary-font-size: 3rem;
+    --terciary-font-size:2rem;
+    --fourth-font-size: 1.5rem;
+    --fith-font-size: 1rem;
+}
+
 .body{
-    font-family:Helvetica;
+    font-family:var(--primary-font);
     justify-content: center;
     padding:0%;
     margin:0%;
 }
 .container{
-    background: linear-gradient(#4083E6,#013c94);
+    background: var(--primary-color);
     justify-content: center;
     min-width:100%;
     min-height:100vh;
 }
 .title{
-    color:#000000;
+    color: var(--font-color);
     font-size: 35px;
     font-weight: 700;
     margin:20px;
@@ -21,14 +41,14 @@
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
-    color:#000000;
+    color:var(--font-color);
 }
 .dev-tag a{
-    color:#000000;
+    color:var(--font-color);
     text-decoration: none;
 }
 .dev-tag a:hover{
-    color:rgb(78, 78, 78);
+    color:var(--font-color-light);
     text-decoration: none;
     cursor:pointer;
 }
@@ -41,8 +61,8 @@
     align-self: center;
 }
 .datos{
-    background-color: rgba(245, 245, 220, 0.288);
-    color:#000000;
+    background-color: var(--fourth-color);
+    color:var(--font-color);
     width:25%;
     height:fit-content;
     margin:20px;
@@ -53,6 +73,7 @@
     display:flex;
     flex-direction: column;
     margin:0%;
+    padding:0%;
 }
 .datos ul li{
     list-style: none;
@@ -82,37 +103,36 @@
 .iconify {  
     width: 30px;
     height: 30px; 
-    background-color: rgba(255, 255, 255, 0.398);
+    background-color: var(--fourth-color);
     border-radius: 10px;
     margin-left: 5px;
 }
 @media(min-width:1442px){
     .title{
-        font-size: 4.3rem;
+        font-size: var(--primary-font-size);
         margin:50px;
     }
     .dev-tag{
-        font-size: 2.5rem;
+        font-size: var(--secondary-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
+        color:var(--font-color);
     }
     .datos{
-        font-size: 2.5rem;
+        font-size: var(--secondary-font-size);
     }
 }
 @media(max-width:1441px){
     .dev-tag{
-        font-size: 1.7rem;
+        font-size: var(--fourth-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
     }
     .datos{
-        font-size: 2rem;
+        font-size: var(--fourth-font-size);
     }
 }
-@media(max-width:1024px){
+@media(max-width:900px){
     .dev-tag{
         font-size: 1.4rem;
         font-weight: 600;
@@ -120,10 +140,10 @@
         color:#000000;
     }
     .datos{
-        font-size: 1.5rem;
+        font-size: var(--fourth-font-size);
     }
     .datos{
-        font-size: 1.5rem;
+        font-size: var(--fourth-font-size);
         width:95%;
         padding:10px 5px;
         margin: 20px auto;
@@ -152,10 +172,9 @@
 }
 @media(max-width:768px){
     .dev-tag{
-        font-size: 1.3rem;
+        font-size: var(--fourth-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
     }
     .wrapper{
         padding: 0px;
@@ -164,7 +183,7 @@
         height:fit-content;
     }
     .datos{
-        font-size: 1.5rem;
+        font-size: var(--fourth-font-size);
         width:95%;
         padding:10px 5px;
         margin: 20px auto;
@@ -186,10 +205,9 @@
 }
 @media(max-width:540px){
     .dev-tag{
-        font-size: 1.2rem;
+        font-size: var(--fourth-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
     }
     .wrapper{
         padding: 0px;
@@ -198,10 +216,10 @@
         height:fit-content;
     }
     .datos{
-        font-size: 1.5rem;
+        font-size: var(--fourth-font-size);
         width:95%;
         margin:auto;
-        padding:10px 10px;
+        padding:10px 5px;
     }
     .datos ul{
         display:flex;

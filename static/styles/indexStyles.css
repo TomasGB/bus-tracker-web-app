@@ -1,3 +1,23 @@
+:root{
+    /*---COLORS VARIABLES----*/
+    --primary-color: linear-gradient(#4083E6,#013c94);
+    --secondary-color:#457dd1;
+    --terciary-color:#548adb;
+    --fourth-color:#ffffff75;
+
+    /*---FONT VARIABLES----*/
+    --primary-font: Helvetica;
+    --font-color: #000000;
+    --font-color-light: #313131;
+    
+    /*---FONT SIZES----*/
+    --primary-font-size: 5rem;
+    --secondary-font-size: 3rem;
+    --terciary-font-size:2rem;
+    --fourth-font-size: 1.5rem;
+    --fith-font-size: 1rem;
+}
+
 .body{
     font-family:Helvetica;
     justify-content: center;
@@ -6,32 +26,32 @@
     height:100vh;
 }
 .container{
-    background: linear-gradient(#4083E6,#013c94);
+    background: var(--primary-color);
     justify-content: center;
     align-self: center;
     min-width:100%;
     min-height:100vh;
 }
 .title{
-    color:#000000;
-    font-size: 35px;
+    color: var(--font-color);
+    font-size: var(--primary-font-size);
     font-weight: 700;
     padding:30px 20px;
     text-align:center;
 }
 .dev-tag{
     margin: 50px 0px;
-    font-size: 1.5rem;
+    font-size: var(--terciary-font-size);
     font-weight: 600;
     text-align: center;
-    color:#000000;
+    color:var(--font-color);
 }
 .dev-tag a{
-    color:#000000;
+    color: var(--font-color);
     text-decoration: none;
 }
 .dev-tag a:hover{
-    color:rgb(78, 78, 78);
+    color:var(--font-color-light);
     text-decoration: none;
     cursor:pointer;
 }
@@ -43,7 +63,7 @@
     height:100vh;
 }
 .form{
-    background-color: #ffffff75;
+    background-color: var(--fourth-color);
     display:flex;
     flex-direction: column;
     justify-content:center;
@@ -73,7 +93,7 @@
     cursor:pointer;
 }
 .form input{
-    background-color: #457dd1;
+    background-color: var(--secondary-color);
     font-weight: 700;
     border:none;
     border-radius: 15px;
@@ -82,7 +102,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .form input:hover{
-    background-color: #548adb;
+    background-color: var(--terciary-color);
     cursor:pointer;
 }
 .logo{
@@ -95,8 +115,8 @@
 }
 @media(min-width:1800px){
     .title{
-        color:#000000;
-        font-size: 5rem;
+        color:var(--font-color);
+        font-size: var(--secondary-font-size);
         font-weight: 700;
         padding: 50px;
         text-align:center;
@@ -105,7 +125,7 @@
         height:fit-content;
     }
     .form{
-        font-size: 2rem;
+        font-size: var(--terciary-font-size);
         width:450px;
         margin-top: 50px;
         padding: 25px;
@@ -121,13 +141,13 @@
         font-size: 2rem;
         font-weight: 600;
         text-align: center;
-        color:#000000;
+        color:var(--font-color);
     }
 }
 @media(max-width:1799px){
     .title{
-        color:#000000;
-        font-size: 3rem;
+        color:var(--font-color);
+        font-size: var(--secondary-font-size);
         font-weight: 700;
         padding: 20px;
         text-align:center;
@@ -136,29 +156,27 @@
         height:fit-content;
     }
     .form{
-        font-size: 1rem;
-        width:300px;
-        margin-top: 30px;
+        font-size: var(--fith-font-size);
+        width:400px;
+        margin-top: 50px;
         padding: 25px;
     }
     .form select, .form input{
-        font-size: 1rem;
+        font-size: var(--terciary-font-size);
     }
     .logo{
-        width:150px;
+        width:250px;
     }
     .dev-tag{
         margin: 30px 0px;
-        font-size: 1rem;
+        font-size: var(--terciary-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
     }
 }
 @media(max-width:1280px){
     .title{
-        color:#000000;
-        font-size: 3rem;
+        font-size: var(--terciary-font-size);
         font-weight: 700;
         padding: 20px;
         text-align:center;
@@ -167,32 +185,33 @@
         height:fit-content;
     }
     .form{
-        font-size: 1rem;
+        font-size: var(--fith-font-size);
         width:300px;
         margin-top: 30px;
         padding: 25px;
     }
     .form select, .form input{
-        font-size: 1rem;
+        font-size: var(--fith-font-size);
     }
     .logo{
         width:150px;
     }
     .dev-tag{
         margin: 30px 0px;
-        font-size: 1rem;
+        font-size: var(--fith-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
     }
 }
 @media(max-width:425px){
+    .title{
+        font-size:var(--terciary-font-size);
+    }
     .dev-tag{
         margin-top: 30px;
-        font-size: 1rem;
+        font-size: var(--fith-font-size);
         font-weight: 600;
         text-align: center;
-        color:#000000;
     }
     .wrapper{
         padding: 0px;
@@ -201,7 +220,7 @@
         height:fit-content;
     }
     .form{
-        font-size: 1rem;
+        font-size: var(--fourth-font-size);
         width:250px;
         margin-top: 30px;
         padding: 25px;
