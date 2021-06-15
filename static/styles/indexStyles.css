@@ -17,16 +17,16 @@
     --fourth-font-size: 1.5rem;
     --fith-font-size: 1rem;
 }
-
 .body{
     font-family:Helvetica;
     justify-content: center;
     padding:0%;
     margin:0%;
     height:100vh;
+    background: var(--primary-color);
 }
 .container{
-    background: var(--primary-color);
+    
     justify-content: center;
     align-self: center;
     min-width:100%;
