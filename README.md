@@ -15,12 +15,12 @@ Utilized Flask microframework as backend and Folium to display the map.
 ## Project structure
 
 * Routes/
-    * `<line_number>`: Folder containing json files with buses routes.
+    * `<line_number>`: Directory containing json files with buses routes.
 
 * Static/
     * Styles: CSS file with styles.
 
-* Templates: Folder with html templates and where the rendered map gets saved.
+* Templates: Directory with html templates and where the rendered map gets saved.
 
 * `app.py` : File containing Flask routes related code.
 
@@ -35,3 +35,9 @@ Utilized Flask microframework as backend and Folium to display the map.
 * `http://127.0.0.1:5000/line/<line>/` : Route where a map is rendered displaying all buses in their current position.
 
 * `http://127.0.0.1:5000/api/buses-data/<line>/` : Route where all buses data is displayed as json.
+
+## Captures
+
+<img src="static/images/bus-tracker2.png" width="800" height="400"/>
+
+<img src="static/images/bus-tracker1.png" width="800" height="400"/>
