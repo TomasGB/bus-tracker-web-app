@@ -1,12 +1,12 @@
 :root{
     /*---COLORS VARIABLES----*/
-    --primary-color: linear-gradient(#4083E6,#013c94);
+    --primary-color: linear-gradient(-45deg,#88b4f7,#3a86f7,#0a66f0,#013583);
     --secondary-color:#457dd1;
     --terciary-color:#548adb;
     --fourth-color:#ffffff75;
 
     /*---FONT VARIABLES----*/
-    --primary-font: Helvetica;
+    --primary-font: 'B612', sans-serif;
     --font-color: #000000;
     --font-color-light: #313131;
     
@@ -24,12 +24,26 @@
     padding:0%;
     margin:0%;
     height:100vh;
+    background: var(--primary-color);
+    background-size: 400% 400%;
+    position:relative;
+    animation: change 10s ease-in-out infinite;
 }
 .container{
     justify-content: center;
     min-width:100%;
     min-height:100vh;
-    background: var(--primary-color);
+}
+@keyframes change {
+    0%{
+        background-position: 0% 0%;
+    }
+    50%{
+        background-position: 100% 100%;
+    }
+    100%{
+        background-position: 0% 0%;
+    }
 }
 .title{
     color: var(--font-color);
@@ -91,7 +105,7 @@
 .map-wrapper{
     margin:20px;
     width:75%;
-    height:35vw;
+    height:33vw;
 }
 .bus-going{
     color: rgb(0, 128, 0);
