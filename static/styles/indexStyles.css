@@ -1,6 +1,6 @@
 :root{
     /*---COLORS VARIABLES----*/
-    --primary-color: linear-gradient(-45deg,#88b4f7,#3a86f7,#0a66f0, #0448AD);
+    --primary-color: linear-gradient(-45deg, #0448AD,#0a66f0,#3a86f7,#88b4f7);
     --secondary-color:#457dd1;
     --terciary-color:#548adb;
     --fourth-color:#ffffff75;
