@@ -11,6 +11,7 @@
 </head>
 
 <body class='body'>
+
     <div class='container'>
         <script>
             function bus_query() {
@@ -20,10 +21,10 @@
                 window.location.assign(theUrl);
             }
         </script>
-        <h1 class='title'>Realtime Bus Tracker</h1>
+        <h1 class='title fade-in'>Realtime Bus Tracker</h1>
         <div class='wrapper'>
             <img class='logo' src='../static/images/bus tracker logo.png' alt='bus-tracker-logo'>
-            <form class='form' method="GET">
+            <form class='form fade-in' method="GET">
                 <p><strong>Please select a bus line</strong></p>
                 <select id="bus_line" name="bus_line">
                     <option disabled selected>Select a bus line</option>
@@ -43,6 +44,7 @@
             </p>
         </div>
     </div>
+    <script src="static/javascript/main.js"></script>
 </body>
 
 </html>

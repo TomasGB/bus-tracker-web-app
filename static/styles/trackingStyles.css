@@ -122,6 +122,14 @@
     border-radius: 10px;
     margin-left: 5px;
 }
+.fade-in{
+    opacity: 0;
+    transition: opacity 600ms ease-in;
+}
+
+.fade-in.appear{
+    opacity:1;
+}
 @media(min-width:1442px){
     .title{
         font-size: var(--primary-font-size);

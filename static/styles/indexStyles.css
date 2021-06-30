@@ -132,6 +132,14 @@
     width:130px;
     text-align: center;
 }
+.fade-in{
+    opacity: 0;
+    transition: opacity 600ms ease-in;
+}
+
+.fade-in.appear{
+    opacity:1;
+}
 @media(min-width:1800px){
     .title{
         color:var(--font-color);
