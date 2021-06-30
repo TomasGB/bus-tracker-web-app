@@ -4,6 +4,7 @@
     --secondary-color:#457dd1;
     --terciary-color:#548adb;
     --fourth-color:#ffffff75;
+    --fith-color:#A0C3F7;
 
     /*---FONT VARIABLES----*/
     --primary-font: 'B612', sans-serif;
@@ -116,7 +117,12 @@
 }
 .form input:hover{
     background-color: var(--terciary-color);
+    color:#ffffff;
     cursor:pointer;
+}
+.form input:focus{
+    background-color: var(--fith-color);
+    cursor:progress;
 }
 .logo{
     display:flex;
